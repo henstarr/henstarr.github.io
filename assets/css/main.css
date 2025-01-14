@@ -4792,6 +4792,20 @@ strong {
     color: #333
 }
 
+#subhead {
+    color: #333;
+    margin-top: 1em;
+    padding-top: 1em;
+    margin-bottom: 0.5em;
+    line-height: 1.25
+}
+
+#belowsubhead{
+    color: #333;
+    line-height: 1.25;
+    padding-top: 0em;
+}
+
 h2 {
     font-size: 2rem
 }
@@ -4821,11 +4835,11 @@ a img {
 }
 
 #particles-js {
-    background: #1488CC;
+    background: #ff2c2c;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #2B32B2, #1488CC);
+    background: -webkit-linear-gradient(to right, #ff2c2c, #fd6969);
     /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #2B32B2, #1488CC);
+    background: linear-gradient(to right, #890b0b, #fd6969);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
     display: flex;
@@ -4967,7 +4981,7 @@ a img {
 .down .icon:hover,
 .footer a:active,
 .footer a:hover {
-    color: #4b5664
+    color: #852a2a
 }
 
 #about {
@@ -5022,6 +5036,21 @@ a img {
 
 @media only screen and (min-width:550px) {
     #projects {
+        width: 80%
+    }
+}
+
+#experiences {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 960px;
+    margin: 0 auto
+}
+
+@media only screen and (min-width:550px) {
+    #experiences {
         width: 80%
     }
 }
@@ -5104,11 +5133,11 @@ a img {
 }
 
 .footer {
-    background: #1488CC;
+    background: #cc1414;
     /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #2B32B2, #1488CC);
+    background: -webkit-linear-gradient(to right, #ff2c2c, #fd6969);
     /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #2B32B2, #1488CC);
+    background: linear-gradient(to right, #890b0b, #fd6969);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     padding: 10px 0;
     margin-top: 100px;
