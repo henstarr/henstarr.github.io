@@ -764,6 +764,23 @@ body.landing { padding: 0; }
 .modal-form button:hover { background: var(--ink); }
 .modal-form button:disabled { opacity: 0.5; cursor: default; }
 
+.modal-button {
+  display: block;
+  width: 100%;
+  margin-top: 18px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--surface);
+  font-family: "Archivo", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 13px 20px;
+  cursor: pointer;
+}
+.modal-button:hover { background: var(--ink); }
+.modal-button:disabled { opacity: 0.5; cursor: default; }
+
 .modal-status {
   min-height: 1.4em;
   margin: 12px 0 0;

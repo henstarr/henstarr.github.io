@@ -31,11 +31,8 @@
     <button type="button" class="modal-close" id="postsignin-close" aria-label="Close">&times;</button>
     <img class="modal-avatar" src="{{ '/assets/img/henry-portrait.jpg' | relative_url }}" alt="">
     <h2 class="modal-title" id="postsignin-title">Get new posts by email</h2>
-    <p class="modal-sub">You're signed in — want new posts sent to your inbox too?</p>
-    <form id="postsignin-subscribe-form" class="modal-form" novalidate>
-      <input type="email" id="postsignin-email" placeholder="you@email.com" autocomplete="email" required>
-      <button type="submit">Subscribe</button>
-    </form>
+    <p class="modal-sub" id="postsignin-sub">Send new posts to your inbox?</p>
+    <button type="button" class="modal-button" id="postsignin-subscribe-button">Subscribe</button>
     <p class="modal-status" id="postsignin-status" role="status" aria-live="polite"></p>
   </div>
 </div>

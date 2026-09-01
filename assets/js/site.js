@@ -8,6 +8,8 @@
   var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   window.hsSupabase = sb;
 
+  var currentSession = null;
+
   function openModal(id) {
     var el = document.getElementById(id);
     if (el) el.hidden = false;
@@ -71,49 +73,62 @@
     });
   }
 
-  // ---- Shared "add to subscribers list" submit handler ----
-  function wireSubscribeForm(formId, emailId, statusId) {
-    var form = document.getElementById(formId);
-    if (!form) return;
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var email = document.getElementById(emailId).value.trim();
-      var status = document.getElementById(statusId);
-      var button = form.querySelector("button");
-      if (!email) return;
-      button.disabled = true;
-      status.textContent = "Subscribing…";
-      fetch(SUPABASE_URL + "/rest/v1/subscribers", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          apikey: SUPABASE_KEY,
-          Authorization: "Bearer " + SUPABASE_KEY,
-          Prefer: "return=minimal"
-        },
-        body: JSON.stringify({ email: email })
-      })
-        .then(function (response) {
-          if (response.status === 201) {
-            status.textContent = "Subscribed — thanks.";
-            form.reset();
-          } else if (response.status === 409) {
-            status.textContent = "You're already subscribed.";
-          } else {
-            status.textContent = "Something went wrong — try again.";
-          }
-        })
-        .catch(function () {
+  // ---- Shared "add to subscribers list" call ----
+  function submitSubscribeEmail(email, status, button, onDone) {
+    button.disabled = true;
+    status.textContent = "Subscribing…";
+    fetch(SUPABASE_URL + "/rest/v1/subscribers", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: SUPABASE_KEY,
+        Authorization: "Bearer " + SUPABASE_KEY,
+        Prefer: "return=minimal"
+      },
+      body: JSON.stringify({ email: email })
+    })
+      .then(function (response) {
+        if (response.status === 201) {
+          status.textContent = "Subscribed — thanks.";
+          if (onDone) onDone();
+        } else if (response.status === 409) {
+          status.textContent = "You're already subscribed.";
+        } else {
           status.textContent = "Something went wrong — try again.";
-        })
-        .finally(function () {
-          button.disabled = false;
-        });
+        }
+      })
+      .catch(function () {
+        status.textContent = "Something went wrong — try again.";
+      })
+      .finally(function () {
+        button.disabled = false;
+      });
+  }
+
+  var introForm = document.getElementById("intro-subscribe-form");
+  if (introForm) {
+    introForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var email = document.getElementById("intro-email").value.trim();
+      if (!email) return;
+      submitSubscribeEmail(
+        email,
+        document.getElementById("intro-status"),
+        introForm.querySelector("button"),
+        function () {
+          introForm.reset();
+        }
+      );
     });
   }
 
-  wireSubscribeForm("intro-subscribe-form", "intro-email", "intro-status");
-  wireSubscribeForm("postsignin-subscribe-form", "postsignin-email", "postsignin-status");
+  var postsigninButton = document.getElementById("postsignin-subscribe-button");
+  if (postsigninButton) {
+    postsigninButton.addEventListener("click", function () {
+      if (!currentSession || !currentSession.user) return;
+      submitSubscribeEmail(currentSession.user.email, document.getElementById("postsignin-status"), postsigninButton);
+    });
+  }
 
   // ---- First-visit "discover" modal ----
   var INTRO_KEY = "hs_intro_seen";
@@ -148,8 +163,8 @@
     closeModal("intro-overlay");
     closeModal("signin-overlay");
 
-    var emailInput = document.getElementById("postsignin-email");
-    if (emailInput && session.user.email) emailInput.value = session.user.email;
+    var sub = document.getElementById("postsignin-sub");
+    if (sub && session.user.email) sub.textContent = "Send new posts to " + session.user.email + "?";
     openModal("postsignin-overlay");
   }
 
@@ -162,7 +177,6 @@
 
   // ---- Header auth state + account modal ----
   var headerAuthLink = document.getElementById("site-header-auth");
-  var currentSession = null;
 
   function openAccountModal() {
     if (!currentSession) return;
