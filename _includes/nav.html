@@ -7,9 +7,11 @@
     <a class="site-header-signin" href="#" id="site-header-auth">Sign in</a>
     <a class="site-header-subscribe" href="#subscribe">Subscribe</a>
   </div>
+  {% if page.layout != 'post' %}
   <nav class="site-header-tabs">
     <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}is-active{% endif %}">Home</a>
-    <a href="{{ '/blog/' | relative_url }}" class="{% if page.url == '/blog/' or page.layout == 'post' %}is-active{% endif %}">Archive</a>
+    <a href="{{ '/blog/' | relative_url }}" class="{% if page.url == '/blog/' %}is-active{% endif %}">Archive</a>
     <a href="{{ '/about/' | relative_url }}" class="{% if page.url == '/about/' %}is-active{% endif %}">About</a>
   </nav>
+  {% endif %}
 </header>

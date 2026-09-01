@@ -1,3 +1,25 @@
+// ---- Header hide-on-scroll-down / show-on-scroll-up (post pages only) ----
+(function () {
+  if (!document.body.classList.contains("is-post")) return;
+  var header = document.querySelector(".site-header");
+  if (!header) return;
+  var lastY = window.scrollY;
+  var headerHeight = header.offsetHeight;
+  window.addEventListener(
+    "scroll",
+    function () {
+      var y = window.scrollY;
+      if (y > lastY && y > headerHeight) {
+        header.classList.add("is-hidden");
+      } else if (y < lastY) {
+        header.classList.remove("is-hidden");
+      }
+      lastY = y;
+    },
+    { passive: true }
+  );
+})();
+
 (function () {
   var script = document.currentScript;
   var SUPABASE_URL = script.getAttribute("data-supabase-url");
