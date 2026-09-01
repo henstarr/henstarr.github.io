@@ -1,0 +1,363 @@
+/* ============================================================
+   Henry Starr — editorial blog theme
+   Tokens: parchment #F1ECE1 (bg), ink #2B2620 (text),
+           oxblood #7A2E3E (accent), muted #8A8172, hairline rgba ink 14%
+   Fixed light palette by design — no dark mode.
+   ============================================================ */
+
+:root {
+  --bg: #F1ECE1;
+  --ink: #2B2620;
+  --muted: #8A8172;
+  --accent: #7A2E3E;
+  --line: rgba(43, 38, 32, 0.14);
+  --surface: #FBF8F2;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+::selection { background: var(--accent); color: var(--surface); }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ---------- Masthead ---------- */
+
+.masthead {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.masthead-word {
+  font-family: "Fraunces", Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 30px;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.masthead-nav {
+  display: flex;
+  gap: 22px;
+}
+
+.masthead-nav a {
+  font-family: "Archivo", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+}
+
+.masthead-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+
+/* ---------- Home / post list ---------- */
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+.home-tagline {
+  text-align: center;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0 0 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-entry {
+  padding: 26px 0;
+  border-top: 1px solid var(--line);
+}
+
+.post-entry:last-child { border-bottom: 1px solid var(--line); }
+
+.post-entry-meta {
+  font-family: "Archivo", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.post-entry-title {
+  margin: 8px 0 6px;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+.post-entry-title a { text-decoration: none; }
+.post-entry-title a:hover { color: var(--accent); }
+
+.post-entry-excerpt {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  max-width: 62ch;
+}
+
+/* ---------- Single post ---------- */
+
+.post-meta {
+  font-family: "Archivo", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 40px 0 18px;
+}
+
+.back-link { color: var(--accent); text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+
+.post-title, .page-title {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: 38px;
+  line-height: 1.2;
+  margin: 0 0 34px;
+  text-wrap: balance;
+}
+
+.post-content, .page-content {
+  font-size: 18px;
+}
+
+.post-content p, .page-content p { margin: 0 0 22px; }
+
+.post-content h2, .page-content h2 {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: 24px;
+  margin: 40px 0 16px;
+}
+
+.post-content h3, .page-content h3 {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: 20px;
+  margin: 32px 0 14px;
+}
+
+.post-content a, .page-content a { color: var(--accent); }
+
+.post-content ul, .post-content ol,
+.page-content ul, .page-content ol {
+  margin: 0 0 22px;
+  padding-left: 26px;
+}
+.post-content li, .page-content li { margin-bottom: 8px; }
+
+.post-content blockquote, .page-content blockquote {
+  margin: 28px 0;
+  padding: 4px 0 4px 20px;
+  border-left: 2px solid var(--accent);
+  color: var(--muted);
+  font-style: italic;
+}
+
+.post-content code, .page-content code {
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 0.85em;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+}
+
+.post-content pre, .page-content pre {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  overflow-x: auto;
+  margin: 0 0 22px;
+}
+.post-content pre code, .page-content pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+/* ---------- About page ---------- */
+
+.about-portrait {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 0 28px;
+  border: 3px solid var(--surface);
+  box-shadow: 0 6px 18px rgba(43, 38, 32, 0.14);
+}
+
+/* ---------- Subscribe ---------- */
+
+.subscribe {
+  max-width: 380px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.subscribe-label {
+  margin: 0 0 12px;
+  font-family: "Archivo", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.subscribe-row {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 6px;
+}
+
+.subscribe-row input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  font-family: "Source Serif 4", serif;
+  font-size: 15px;
+  color: var(--ink);
+  padding: 4px 2px;
+}
+.subscribe-row input::placeholder { color: var(--muted); }
+.subscribe-row input:focus { outline: none; }
+
+.subscribe-row button {
+  border: 0;
+  background: transparent;
+  font-family: "Archivo", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 4px 0 4px 14px;
+  cursor: pointer;
+}
+.subscribe-row button:hover { color: var(--ink); }
+.subscribe-row button:disabled { opacity: 0.5; cursor: default; }
+
+.subscribe-status {
+  min-height: 1.4em;
+  margin: 12px 0 0;
+  font-size: 13px;
+}
+.subscribe-status[data-state="ok"] { color: var(--accent); }
+.subscribe-status[data-state="error"] { color: #A33; }
+
+.subscribe-fineprint {
+  margin: 6px 0 0;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  margin-top: 60px;
+  padding: 48px 0 40px;
+  border-top: 1px solid var(--line);
+}
+
+.footer-bottom {
+  max-width: 640px;
+  margin: 36px auto 0;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-links a {
+  font-family: "Archivo", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+}
+.footer-links a:hover { color: var(--accent); }
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 480px) {
+  .post-title, .page-title { font-size: 30px; }
+  .post-entry-title { font-size: 21px; }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

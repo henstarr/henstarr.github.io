@@ -1,0 +1,17 @@
+<footer class="site-footer">
+  {% include subscribe-form.html %}
+
+  <div class="footer-bottom">
+    <div class="footer-links">
+      <a aria-label="Email" href="mailto:{{ site.email }}">Email</a>
+      <a aria-label="GitHub" href="https://github.com/henstarr" target="_blank" rel="noopener">GitHub</a>
+      <a aria-label="LinkedIn" href="https://www.linkedin.com/in/henrystarr/" target="_blank" rel="noopener">LinkedIn</a>
+      <a aria-label="Résumé" href="{{ '/assets/files/HS_Resume_Dec2024.pdf' | relative_url }}" target="_blank" rel="noopener">Résumé</a>
+    </div>
+    <p>&copy; {{ site.time | date: '%Y' }} {{ site.author }}</p>
+  </div>
+</footer>
+
+<script src="{{ '/assets/js/subscribe.js' | relative_url }}"
+  data-supabase-url="{{ site.supabase_url }}"
+  data-supabase-key="{{ site.supabase_publishable_key }}"></script>

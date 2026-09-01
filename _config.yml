@@ -1,0 +1,46 @@
+title: Henry Starr
+tagline: Software notes, shipped occasionally.
+description: >-
+  Henry Starr's blog on software engineering, AI, and things he's building.
+author: Henry Starr
+email: henry.j.starr@gmail.com
+url: "https://www.henryjstarr.com"
+baseurl: ""
+
+# Supabase project used by the email subscribe form (assets/js/subscribe.js).
+# The publishable key is safe to expose client-side — it can only INSERT into
+# public.subscribers under Row Level Security, never read or modify rows.
+supabase_url: "https://sczheyjdrpbfkzlteyou.supabase.co"
+supabase_publishable_key: "sb_publishable_x6IW1iXRAmsTfLEq051RVg_4uqbsNDF"
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+permalink: /:year/:month/:day/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+feed:
+  path: feed.xml
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: page
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock

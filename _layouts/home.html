@@ -1,0 +1,16 @@
+---
+layout: default
+---
+<div class="home">
+  <p class="home-tagline">{{ site.tagline }}</p>
+
+  <ul class="post-list">
+    {% for post in site.posts %}
+    <li class="post-entry">
+      <span class="post-entry-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+      <h2 class="post-entry-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+      {% if post.excerpt %}<p class="post-entry-excerpt">{{ post.excerpt | strip_html | truncate: 180 }}</p>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
