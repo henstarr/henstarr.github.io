@@ -1018,3 +1018,16 @@ body.landing { padding: 0; }
   cursor: pointer;
 }
 .account-signout:hover { color: var(--accent); }
+
+/* ---------- Wide screens ---------- */
+
+@media (min-width: 1280px) {
+  .site-header-bar,
+  .site-header-tabs,
+  .home-feed {
+    max-width: 1120px;
+  }
+  main {
+    max-width: 880px;
+  }
+}
