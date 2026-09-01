@@ -1,0 +1,21 @@
+<div class="engagement" id="engagement" data-post-slug="{{ page.url }}">
+  <div class="engagement-bar">
+    <button type="button" class="like-button" id="like-button" aria-pressed="false">
+      <span class="like-icon" aria-hidden="true">&hearts;</span>
+      <span id="like-count">0</span>
+    </button>
+    <span class="view-count"><span id="view-count">&mdash;</span> views</span>
+  </div>
+
+  <div class="comments">
+    <h2 class="comments-title"><span id="comment-count">0</span> Comments</h2>
+
+    <form id="comment-form" class="comment-form" hidden novalidate>
+      <textarea id="comment-body" placeholder="Write a comment&hellip;" maxlength="2000" required></textarea>
+      <button type="submit">Comment</button>
+    </form>
+    <button type="button" class="comment-signin-prompt" id="comment-signin-prompt" hidden>Sign in to leave a comment</button>
+
+    <ul class="comment-list" id="comment-list"></ul>
+  </div>
+</div>

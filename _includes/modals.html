@@ -1,0 +1,27 @@
+<div class="modal-overlay" id="signin-overlay" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="signin-title">
+    <button type="button" class="modal-close" id="signin-close" aria-label="Close">&times;</button>
+    <img class="modal-avatar" src="{{ '/assets/img/henry-portrait.jpg' | relative_url }}" alt="">
+    <h2 class="modal-title" id="signin-title">Sign in</h2>
+    <p class="modal-sub">We'll email you a link — no password needed.</p>
+    <form id="signin-form" class="modal-form" novalidate>
+      <input type="email" id="signin-email" placeholder="you@email.com" autocomplete="email" required>
+      <button type="submit">Send magic link</button>
+    </form>
+    <p class="modal-status" id="signin-status" role="status" aria-live="polite"></p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="intro-overlay" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="intro-title">
+    <button type="button" class="modal-close" id="intro-close" aria-label="Close">&times;</button>
+    <img class="modal-avatar" src="{{ '/assets/img/henry-portrait.jpg' | relative_url }}" alt="">
+    <h2 class="modal-title" id="intro-title">Discover more from {{ site.title }}</h2>
+    <form id="intro-subscribe-form" class="modal-form" novalidate>
+      <input type="email" id="intro-email" placeholder="Enter your email&hellip;" autocomplete="email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+    <p class="modal-status" id="intro-status" role="status" aria-live="polite"></p>
+    <p class="modal-footnote">Already have an account? <a href="#" id="intro-signin-link">Sign in</a></p>
+  </div>
+</div>

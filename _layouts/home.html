@@ -49,9 +49,7 @@
   </div>
 
   {% include landing-footer.html %}
-
-  <script src="{{ '/assets/js/subscribe.js' | relative_url }}"
-    data-supabase-url="{{ site.supabase_url }}"
-    data-supabase-key="{{ site.supabase_publishable_key }}"></script>
+  {% include modals.html %}
+  {% include scripts.html %}
 </body>
 </html>
