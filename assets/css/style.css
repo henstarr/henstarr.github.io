@@ -235,11 +235,16 @@ main {
 body.landing { padding: 0; }
 
 .landing-wrap {
-  flex: 1 0 auto;
   max-width: 640px;
   margin: 0 auto;
   width: 100%;
   padding: 110px 24px 56px;
+}
+
+.landing-grow {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .landing-eyebrow {
@@ -323,6 +328,82 @@ body.landing { padding: 0; }
   .landing-bio { font-size: 18px; }
   .landing-bio p::first-letter { font-size: 2.6em; }
 }
+
+/* ---------- Subscribe card (About page) ---------- */
+
+.subscribe-card {
+  max-width: 460px;
+  margin: 8px auto 0;
+  padding: 40px 32px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  text-align: center;
+}
+
+.subscribe-card-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 20px;
+  border: 2px solid var(--bg);
+  box-shadow: 0 4px 12px rgba(43, 38, 32, 0.14);
+}
+
+.subscribe-card-title {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+
+.subscribe-card-subtitle {
+  font-family: "Archivo", sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 26px;
+}
+
+.subscribe-card-row {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.subscribe-card-row input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  padding: 12px 18px;
+  font-family: "Source Serif 4", serif;
+  font-size: 14px;
+  color: var(--ink);
+}
+.subscribe-card-row input::placeholder { color: var(--muted); }
+.subscribe-card-row input:focus { outline: none; }
+
+.subscribe-card-row button {
+  border: 0;
+  background: var(--accent);
+  color: var(--surface);
+  font-family: "Archivo", sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 12px 22px;
+  cursor: pointer;
+}
+.subscribe-card-row button:hover { background: var(--ink); }
+.subscribe-card-row button:disabled { opacity: 0.5; cursor: default; }
+
+.subscribe-card .subscribe-status { margin: 14px 0 0; }
 
 /* ---------- Subscribe ---------- */
 

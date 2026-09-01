@@ -1,0 +1,16 @@
+<div class="subscribe-card" id="subscribe">
+  <img class="subscribe-card-avatar" src="{{ '/assets/img/henry-portrait.jpg' | relative_url }}" alt="{{ site.author }}">
+  <h2 class="subscribe-card-title">Get New Posts by Email</h2>
+  <p class="subscribe-card-subtitle">{{ site.tagline | upcase }}</p>
+  <form id="subscribe-form" class="subscribe-card-row" novalidate>
+    <input
+      type="email"
+      name="email"
+      id="subscribe-email"
+      placeholder="Type your email&hellip;"
+      autocomplete="email"
+      required>
+    <button type="submit">Subscribe</button>
+  </form>
+  <p class="subscribe-status" id="subscribe-status" role="status" aria-live="polite"></p>
+</div>
