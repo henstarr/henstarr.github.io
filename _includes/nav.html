@@ -1,8 +1,14 @@
-<header class="masthead">
-  <a class="masthead-word" href="{{ '/' | relative_url }}">{{ site.title }}</a>
-  <nav class="masthead-nav">
-    <a href="{{ '/' | relative_url }}">Home</a>
-    <a href="{{ '/blog/' | relative_url }}">Archive</a>
-    <a href="{{ '/about/' | relative_url }}">About</a>
+<header class="site-header">
+  <div class="site-header-bar">
+    <a class="site-header-avatar" href="{{ '/' | relative_url }}">
+      <img src="{{ '/assets/img/henry-portrait.jpg' | relative_url }}" alt="{{ site.author }}">
+    </a>
+    <a class="site-header-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <a class="site-header-subscribe" href="#subscribe">Subscribe</a>
+  </div>
+  <nav class="site-header-tabs">
+    <a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}is-active{% endif %}">Home</a>
+    <a href="{{ '/blog/' | relative_url }}" class="{% if page.url == '/blog/' or page.layout == 'post' %}is-active{% endif %}">Archive</a>
+    <a href="{{ '/about/' | relative_url }}" class="{% if page.url == '/about/' %}is-active{% endif %}">About</a>
   </nav>
 </header>

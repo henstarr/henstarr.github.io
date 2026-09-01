@@ -5,9 +5,53 @@
 </head>
 <body class="landing">
   {% include nav.html %}
+
   <div class="landing-grow">
-    {% include landing-header.html %}
+    <div class="home-feed">
+      {% assign featured = site.posts.first %}
+      {% assign rest = site.posts | offset: 1 %}
+
+      <section class="feature">
+        <div class="feature-main">
+          <span class="feature-eyebrow">Latest</span>
+          <h1 class="feature-title"><a href="{{ featured.url | relative_url }}">{{ featured.title }}</a></h1>
+          {% if featured.excerpt %}<p class="feature-excerpt">{{ featured.excerpt | strip_html | truncate: 140 }}</p>{% endif %}
+          <span class="feature-meta">{{ featured.date | date: "%b %-d" }} &middot; {{ site.author | upcase }}</span>
+        </div>
+        <ul class="feature-list">
+          {% for post in rest limit: 4 %}
+          <li>
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            <span>{{ post.date | date: "%b %-d" }} &middot; {{ site.author | upcase }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section class="home-latest">
+        <div class="home-latest-main">
+          <h2 class="home-section-title">Latest</h2>
+          <ul class="post-list">
+            {% for post in site.posts %}
+            <li class="post-entry">
+              <span class="post-entry-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+              <h3 class="post-entry-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+              {% if post.excerpt %}<p class="post-entry-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>{% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <aside class="home-sidebar">
+          {% include subscribe-card.html %}
+        </aside>
+      </section>
+    </div>
   </div>
+
   {% include landing-footer.html %}
+
+  <script src="{{ '/assets/js/subscribe.js' | relative_url }}"
+    data-supabase-url="{{ site.supabase_url }}"
+    data-supabase-key="{{ site.supabase_publishable_key }}"></script>
 </body>
 </html>
