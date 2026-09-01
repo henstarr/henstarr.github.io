@@ -16,11 +16,11 @@ title: Some Title
 The rest is normal Markdown.
 ```
 
-Commit it and push to `main`. GitHub Pages rebuilds the site automatically — nothing to run locally, no build step to remember. The post shows up on the homepage, newest first, at `/YYYY/MM/DD/some-title/`.
+Commit it and push to `main`. GitHub Pages rebuilds the site automatically — nothing to run locally, no build step to remember. The post shows up on [/blog](/blog/), newest first, at `/YYYY/MM/DD/some-title/`.
 
 ## Editing a page
 
-`about.md` and `index.md` at the repo root work the same way — front matter, then Markdown. Nav links live in `_includes/nav.html` if a new one needs adding.
+`index.md` is the front-page bio (layout `home`); `blog.md` is the post list (layout `blog`). Both work the same way — front matter, then Markdown. Nav links live in `_includes/nav.html`.
 
 ## How subscriptions work
 

@@ -3,6 +3,7 @@ tagline: Software notes, shipped occasionally.
 description: >-
   Henry Starr's blog on software engineering, AI, and things he's building.
 author: Henry Starr
+location: College Park, MD
 email: henry.j.starr@gmail.com
 url: "https://www.henryjstarr.com"
 baseurl: ""
@@ -34,11 +35,6 @@ defaults:
       type: posts
     values:
       layout: post
-  - scope:
-      path: ""
-      type: pages
-    values:
-      layout: page
 
 exclude:
   - README.md
