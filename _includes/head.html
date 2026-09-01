@@ -2,8 +2,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }} — {{ site.tagline }}{% endif %}</title>
-<meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 }}">
-<link rel="canonical" href="{{ page.url | absolute_url }}">
 <link rel="shortcut icon" href="{{ '/assets/img/henry-portrait.jpg' | relative_url }}">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,4 +10,4 @@
 
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
-{% seo %}
+{% seo title=false %}
