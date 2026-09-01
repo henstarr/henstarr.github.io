@@ -49,6 +49,7 @@ img { max-width: 100%; display: block; }
 
 .site-header {
   flex-shrink: 0;
+  background: var(--surface);
   border-bottom: 1px solid var(--line);
 }
 
