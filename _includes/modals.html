@@ -25,3 +25,36 @@
     <p class="modal-footnote">Already have an account? <a href="#" id="intro-signin-link">Sign in</a></p>
   </div>
 </div>
+
+<div class="modal-overlay" id="postsignin-overlay" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="postsignin-title">
+    <button type="button" class="modal-close" id="postsignin-close" aria-label="Close">&times;</button>
+    <img class="modal-avatar" src="{{ '/assets/img/henry-portrait.jpg' | relative_url }}" alt="">
+    <h2 class="modal-title" id="postsignin-title">Get new posts by email</h2>
+    <p class="modal-sub">You're signed in — want new posts sent to your inbox too?</p>
+    <form id="postsignin-subscribe-form" class="modal-form" novalidate>
+      <input type="email" id="postsignin-email" placeholder="you@email.com" autocomplete="email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+    <p class="modal-status" id="postsignin-status" role="status" aria-live="polite"></p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="account-overlay" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="account-title">
+    <button type="button" class="modal-close" id="account-close" aria-label="Close">&times;</button>
+    <h2 class="modal-title" id="account-title">Account</h2>
+    <p class="account-email" id="account-email"></p>
+
+    <form id="account-name-form" class="account-field">
+      <label for="account-name">Display name</label>
+      <div class="account-field-row">
+        <input type="text" id="account-name" placeholder="How you appear on comments" maxlength="60">
+        <button type="submit">Save</button>
+      </div>
+    </form>
+    <p class="modal-status" id="account-status" role="status" aria-live="polite"></p>
+
+    <button type="button" class="account-signout" id="account-signout">Sign out</button>
+  </div>
+</div>

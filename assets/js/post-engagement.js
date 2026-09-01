@@ -32,13 +32,18 @@
           day: "numeric",
           year: "numeric"
         });
+        var canDelete = session && session.user && session.user.id === c.user_id;
         return (
           '<li class="comment-item">' +
           '<div class="comment-item-head"><span class="comment-author">' +
           escapeHtml(c.author_name) +
           '</span><span class="comment-date">' +
           date +
-          "</span></div>" +
+          "</span>" +
+          (canDelete
+            ? '<button type="button" class="comment-delete" data-comment-id="' + c.id + '">Delete</button>'
+            : "") +
+          "</div>" +
           '<p class="comment-body">' +
           escapeHtml(c.body) +
           "</p></li>"
@@ -140,6 +145,21 @@
     window.hsOpenSignIn();
   });
 
+  commentList.addEventListener("click", function (e) {
+    if (!e.target.classList.contains("comment-delete")) return;
+    if (!session) return;
+    if (!window.confirm("Delete this comment?")) return;
+    var id = e.target.getAttribute("data-comment-id");
+    e.target.disabled = true;
+    sb.from("comments")
+      .delete()
+      .eq("id", id)
+      .eq("user_id", session.user.id)
+      .then(function () {
+        loadComments();
+      });
+  });
+
   commentForm.addEventListener("submit", function (e) {
     e.preventDefault();
     if (!session) {
@@ -150,7 +170,8 @@
     if (!body) return;
     var button = commentForm.querySelector("button");
     button.disabled = true;
-    var authorName = (session.user.email || "Reader").split("@")[0];
+    var meta = session.user.user_metadata || {};
+    var authorName = meta.display_name || (session.user.email || "Reader").split("@")[0];
     sb.from("comments")
       .insert({ post_slug: slug, user_id: session.user.id, author_name: authorName, body: body })
       .then(function (res) {
@@ -168,6 +189,7 @@
     session = currentSession;
     updateCommentGate();
     loadLikes();
+    loadComments();
   }
 
   sb.auth.getSession().then(function (res) {
@@ -177,6 +199,5 @@
     init(e.detail.session);
   });
 
-  loadComments();
   loadViews();
 })();
