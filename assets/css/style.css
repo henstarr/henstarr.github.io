@@ -238,7 +238,7 @@ body.landing { padding: 0; }
   max-width: 640px;
   margin: 0 auto;
   width: 100%;
-  padding: 110px 24px 56px;
+  padding: 24px 24px 56px;
 }
 
 .landing-grow {
@@ -324,7 +324,7 @@ body.landing { padding: 0; }
 .landing-footer-links a:hover { color: var(--accent); }
 
 @media (max-width: 480px) {
-  .landing-wrap { padding-top: 72px; }
+  .landing-wrap { padding-top: 12px; }
   .landing-bio { font-size: 18px; }
   .landing-bio p::first-letter { font-size: 2.6em; }
 }
