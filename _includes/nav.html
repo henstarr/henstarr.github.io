@@ -1,11 +1,15 @@
 <header class="site-header">
   <div class="site-header-bar">
-    <a class="site-header-avatar" href="{{ '/' | relative_url }}">
-      <img src="{{ '/assets/img/henry-portrait.jpg' | relative_url }}" alt="{{ site.author }}">
-    </a>
+    <div class="site-header-side site-header-side-left">
+      <a class="site-header-avatar" href="{{ '/' | relative_url }}">
+        <img src="{{ '/assets/img/henry-portrait.jpg' | relative_url }}" alt="{{ site.author }}">
+      </a>
+    </div>
     <a class="site-header-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
-    <a class="site-header-signin" href="#" id="site-header-auth">Sign in</a>
-    <a class="site-header-subscribe" href="#subscribe">Subscribe</a>
+    <div class="site-header-side site-header-side-right">
+      <a class="site-header-signin" href="#" id="site-header-auth">Sign in</a>
+      <a class="site-header-subscribe" href="#subscribe">Subscribe</a>
+    </div>
   </div>
   {% if page.layout != 'post' %}
   <nav class="site-header-tabs">

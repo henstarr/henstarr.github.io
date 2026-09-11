@@ -70,6 +70,16 @@ img { max-width: 100%; display: block; }
   gap: 16px;
 }
 
+.site-header-side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+.site-header-side-left { justify-content: flex-start; }
+.site-header-side-right { justify-content: flex-end; }
+
 .site-header-avatar { flex: none; line-height: 0; }
 .site-header-avatar img {
   width: 34px;
@@ -154,6 +164,9 @@ main {
   padding: 40px 24px 80px;
 }
 
+main .post-meta,
+main .post-title,
+main .page-title,
 main .post-content,
 main .page-content {
   max-width: 640px;
@@ -807,7 +820,7 @@ body.landing { padding: 0; }
 
 .engagement {
   max-width: 640px;
-  margin: 48px auto 0;
+  margin: 48px 0 0;
   padding-top: 32px;
   border-top: 1px solid var(--line);
 }
