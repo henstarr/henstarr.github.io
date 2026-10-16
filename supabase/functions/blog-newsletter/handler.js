@@ -1,3 +1,5 @@
+import { emailDocument } from "./email-layout.js";
+
 const SITE = "https://www.henryjstarr.com";
 const OWNER = "henry.j.starr@gmail.com";
 const FROM = "Henry Starr <noreply@henryjstarr.com>";
@@ -37,7 +39,17 @@ export function emailContent(post, unsubscribe, test = false) {
   const subject = `${test ? "[Test] " : ""}New post: ${post.title}`;
   const ending = unsubscribe ? `You subscribed to Henry Starr’s blog. Unsubscribe: ${unsubscribe}` : "This delivery test was requested by the blog owner. No subscriber mailing was sent.";
   const text = `${post.title}\n\n${post.description}\n\nRead the post: ${post.url}\n\n${ending}`;
-  const html = `<div style="background:#f5f1e9;padding:36px 20px;font-family:Georgia,serif;color:#2b2925"><div style="max-width:580px;margin:auto"><p style="font:12px Arial,sans-serif;letter-spacing:2px;color:#7a2e3e">HENRY STARR · NEW WRITING</p><h1 style="font-weight:normal;font-size:34px;line-height:1.2">${escape(post.title)}</h1><p style="font-size:18px;line-height:1.7">${escape(post.description)}</p><p style="margin:28px 0"><a style="color:#7a2e3e" href="${escape(post.url)}">Read the post →</a></p><hr style="border:0;border-top:1px solid #d8d2c7;margin:32px 0"><p style="font:12px/1.7 Arial,sans-serif;color:#6e685f">${unsubscribe ? `You subscribed to Henry Starr’s blog. <a href="${escape(unsubscribe)}">Unsubscribe</a>.` : escape(ending)}</p></div></div>`;
+  const html = emailDocument({
+    preheader: post.description || `New writing from Henry Starr: ${post.title}`,
+    label: test ? "NEW WRITING · DELIVERY TEST" : "NEW WRITING",
+    title: post.title,
+    description: post.description,
+    buttonLabel: "Read the post",
+    buttonUrl: post.url,
+    note: "Thanks for reading. — Henry",
+    footer: unsubscribe ? "You’re receiving this because you subscribed to Henry Starr’s blog." : ending,
+    footerLink: unsubscribe ? { label: "Unsubscribe", url: unsubscribe } : null,
+  });
   return { subject, text, html };
 }
 

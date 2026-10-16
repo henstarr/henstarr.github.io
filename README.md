@@ -67,6 +67,8 @@ Supabase also provides magic-link sign-in, comments and likes. `assets/js/site.j
 
 The backend project must be active for subscriptions and reader interactions. Restore it in Supabase if paused. Failed calls show a readable error and retain comment/email input for retry; they do not block reading. Confirm that Supabase Auth’s allowed redirect URLs include the production domain before testing magic links.
 
+Authentication and new-post emails share the inline HTML layout in `supabase/functions/blog-newsletter/email-layout.js`. Run `node scripts/render_emails.mjs` after changing that design. Paste the generated `supabase/templates/confirm-email.html` into both **Confirm sign up** and **Magic link or OTP** in Supabase Authentication → Emails, with subject **Confirm your email · Henry Starr**. Saving a file in this repository does not update Supabase’s hosted Auth templates. Keep `{{ .ConfirmationURL }}` intact so Supabase supplies each one-time link. The email correctly explains that joining the list requires confirmation on the site after email verification.
+
 ## Layout references
 
 Familiar blog patterns informed the structure: [Josh W. Comeau](https://www.joshwcomeau.com/) for clear article summaries and topic browsing, and [Simon Willison](https://simonwillison.net/) for searchable archives, dated entries, and RSS. The blog retains its own warm paper palette and serif typography.
