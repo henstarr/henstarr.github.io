@@ -1,14 +1,17 @@
 ---
 layout: default
 ---
-<div class="home">
-  <ul class="post-list">
-    {% for post in site.posts %}
-    <li class="post-entry">
-      <span class="post-entry-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-      <h2 class="post-entry-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
-      {% if post.excerpt %}<p class="post-entry-excerpt">{{ post.excerpt | strip_html | truncate: 180 }}</p>{% endif %}
-    </li>
-    {% endfor %}
-  </ul>
+<header class="page-heading"><p class="eyebrow">The collection</p><h1>Writing<span class="accent">.</span></h1><p>Notes, projects, and things learned along the way. Every post, newest first.</p></header>
+<div class="archive" data-archive>
+  <form class="archive-controls" role="search" hidden>
+    <div class="search-field"><label for="archive-search">Search the archive</label><input id="archive-search" type="search" name="q" placeholder="Search posts…" autocomplete="off" aria-controls="archive-results"></div>
+    <div class="topic-field"><label for="archive-topic">Topic</label><select id="archive-topic" name="topic" aria-controls="archive-results"><option value="">All topics</option>{% assign sorted_tags = site.tags | sort %}{% for tag in sorted_tags %}<option value="{{ tag[0] | escape }}">{{ tag[0] | escape }}</option>{% endfor %}</select></div>
+  </form>
+  <p class="results-count" id="archive-count" role="status" aria-live="polite">{{ site.posts.size }} {% if site.posts.size == 1 %}post{% else %}posts{% endif %}</p>
+  <div id="archive-results">{% assign years = site.posts | group_by_exp: 'post', 'post.date | date: "%Y"' %}{% for year in years %}
+    <section class="archive-year" data-year><h2>{{ year.name }}</h2><ul class="post-list">{% for post in year.items %}{% include post-entry.html post=post %}{% endfor %}</ul></section>
+  {% endfor %}</div>
+  <div class="empty-state" id="archive-empty" hidden><h2>No posts found.</h2><p>Try a different search or explore all the writing.</p><button class="text-link" type="button" id="archive-reset">Clear filters <span aria-hidden="true">→</span></button></div>
+  {% if site.posts.size == 0 %}<p class="empty-state">Nothing here just yet. Check back for the first post.</p>{% endif %}
+  <noscript><p>All posts are listed above. Enable JavaScript to search and filter them.</p></noscript>
 </div>

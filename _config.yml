@@ -7,9 +7,13 @@ email: henry.j.starr@gmail.com
 url: "https://www.henryjstarr.com"
 baseurl: ""
 
+# Custom layouts and CSS own the design. Disable GitHub Pages' implicit Primer
+# theme, whose generated assets/css/style.css would overwrite this stylesheet.
+theme: null
+
 # Supabase project used by the email subscribe form (assets/js/subscribe.js).
-# The publishable key is safe to expose client-side — it can only INSERT into
-# public.subscribers under Row Level Security, never read or modify rows.
+# The publishable key is safe to expose client-side. Subscriber inserts also
+# require a verified reader session; RLS restricts inserts to that user’s email.
 supabase_url: "https://sczheyjdrpbfkzlteyou.supabase.co"
 supabase_publishable_key: "sb_publishable_x6IW1iXRAmsTfLEq051RVg_4uqbsNDF"
 
@@ -39,3 +43,7 @@ exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
+  - vendor
+  - output
+  - scripts
+  - .playwright-cli

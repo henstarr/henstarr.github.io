@@ -2,3 +2,7 @@ _site/
 .jekyll-cache/
 .jekyll-metadata
 .sass-cache/
+.bundle/
+vendor/
+output/
+.playwright-cli/

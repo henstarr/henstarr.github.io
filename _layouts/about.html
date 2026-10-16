@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-{% include head.html %}
-</head>
-<body class="landing">
-  {% include nav.html %}
-  <div class="landing-grow">
-    {% include landing-header.html %}
-    {% include subscribe-card.html %}
-  </div>
-  {% include landing-footer.html %}
-  {% include modals.html %}
-  {% include scripts.html %}
-</body>
-</html>
+---
+layout: default
+---
+<div class="about-grid">
+  <article><header class="page-heading"><p class="eyebrow">A little introduction</p><h1>Hi, I’m Henry<span class="accent">.</span></h1><p>Software, philosophy, and a place to think out loud.</p></header>
+    <div class="post-content">{{ content }}</div>
+    <div class="about-links"><a class="text-link" href="mailto:{{ site.email }}">Say hello <span aria-hidden="true">↗</span></a><a href="https://github.com/henstarr">GitHub</a><a href="https://www.linkedin.com/in/henrystarr/">LinkedIn</a></div>
+  </article>
+  <figure class="about-portrait"><img src="{{ '/assets/img/henry-portrait.jpg' | relative_url }}" alt="Henry Starr" width="640" height="640"><figcaption>{{ site.author }} / {{ site.location }}</figcaption></figure>
+</div>

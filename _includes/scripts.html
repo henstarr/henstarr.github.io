@@ -1,11 +1,12 @@
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="{{ '/assets/js/site.js' | relative_url }}"
+<script defer src="{{ '/assets/js/blog.js' | relative_url }}"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+<script defer src="{{ '/assets/js/site.js' | relative_url }}"
   data-supabase-url="{{ site.supabase_url }}"
   data-supabase-key="{{ site.supabase_publishable_key }}"></script>
-<script src="{{ '/assets/js/subscribe.js' | relative_url }}"
+<script defer src="{{ '/assets/js/subscribe.js' | relative_url }}"
   data-supabase-url="{{ site.supabase_url }}"
   data-supabase-key="{{ site.supabase_publishable_key }}"></script>
-<script src="{{ '/assets/js/post-engagement.js' | relative_url }}"></script>
+{% if page.layout == 'post' %}<script defer src="{{ '/assets/js/post-engagement.js' | relative_url }}"></script>{% endif %}
 <!-- DEMO TODO: Re-enable the chatbot when the demo is ready.
 <script src="https://aevron.io/widget.js" data-client="henryjstarr" async></script>
 -->

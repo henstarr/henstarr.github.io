@@ -1,9 +1,11 @@
 ---
 title: Why I Rebuilt This Site
+description: From a static portfolio to a place for writing about software, side projects, and the things I learn along the way.
+tags: [Personal, Building]
 ---
 
 For a while this domain was a portfolio page: a headshot, a project grid, a résumé link. Useful, but static in the worst sense — it only ever changed when I updated a job title.
 
-I'd rather have a place to actually write: short notes on what I'm building, things I run into at work, projects that don't fit neatly on a résumé bullet. So this is that place now. The front page is just me; the writing lives at [/blog](/blog/), newest first.
+I'd rather have a place to actually write: short notes on what I'm building, things I run into at work, projects that don't fit neatly on a résumé bullet. So this is that place now. The front page highlights the latest writing; every post lives in the [archive]({{ '/blog/' | relative_url }}), newest first.
 
-If you want new posts by email rather than checking back, there's a subscribe box at the bottom of the blog and every post. No account, no tracking beyond the address itself — just an email when something new goes up.
+If you want to keep up, you can follow the [RSS feed]({{ '/feed.xml' | relative_url }}) or join the email list at the bottom of any page. Email addresses are saved for future updates; sending new-post emails isn't automated yet.

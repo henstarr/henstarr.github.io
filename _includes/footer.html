@@ -1,12 +1,4 @@
-<footer class="site-footer">
+<footer class="site-footer"><div class="footer-inner">
   {% include subscribe-form.html %}
-
-  <div class="footer-bottom">
-    <div class="footer-links">
-      <a aria-label="Email" href="mailto:{{ site.email }}">Email</a>
-      <a aria-label="GitHub" href="https://github.com/henstarr" target="_blank" rel="noopener">GitHub</a>
-      <a aria-label="LinkedIn" href="https://www.linkedin.com/in/henrystarr/" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-    <p>&copy; {{ site.time | date: '%Y' }} {{ site.author }}</p>
-  </div>
-</footer>
+  <div class="footer-bottom"><p>&copy; {{ site.time | date: '%Y' }} {{ site.author }} <span class="footer-note">A personal corner of the internet.</span></p><nav class="footer-links" aria-label="Elsewhere"><a href="mailto:{{ site.email }}">Email</a><a href="https://github.com/henstarr">GitHub</a><a href="https://www.linkedin.com/in/henrystarr/">LinkedIn</a><a href="{{ '/feed.xml' | relative_url }}">RSS <span aria-hidden="true">↗</span></a></nav></div>
+</div></footer>

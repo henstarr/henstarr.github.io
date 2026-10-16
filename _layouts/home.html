@@ -1,55 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-{% include head.html %}
-</head>
-<body class="landing">
-  {% include nav.html %}
-
-  <div class="landing-grow">
-    <div class="home-feed">
-      {% assign featured = site.posts.first %}
-      {% assign rest = site.posts | offset: 1 %}
-
-      <section class="feature">
-        <div class="feature-main">
-          <span class="feature-eyebrow">Latest</span>
-          <h1 class="feature-title"><a href="{{ featured.url | relative_url }}">{{ featured.title }}</a></h1>
-          {% if featured.excerpt %}<p class="feature-excerpt">{{ featured.excerpt | strip_html | truncate: 140 }}</p>{% endif %}
-          <span class="feature-meta">{{ featured.date | date: "%b %-d" }} &middot; {{ site.author | upcase }}</span>
-        </div>
-        <ul class="feature-list">
-          {% for post in rest limit: 4 %}
-          <li>
-            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-            <span>{{ post.date | date: "%b %-d" }} &middot; {{ site.author | upcase }}</span>
-          </li>
-          {% endfor %}
-        </ul>
-      </section>
-
-      <section class="home-latest">
-        <div class="home-latest-main">
-          <h2 class="home-section-title">All Posts</h2>
-          <ul class="post-list">
-            {% for post in site.posts %}
-            <li class="post-entry">
-              <span class="post-entry-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-              <h3 class="post-entry-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-              {% if post.excerpt %}<p class="post-entry-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>{% endif %}
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-        <aside class="home-sidebar">
-          {% include subscribe-card.html %}
-        </aside>
-      </section>
-    </div>
+---
+layout: default
+---
+<section class="home-intro" aria-labelledby="home-title">
+  <p class="eyebrow">The personal blog of {{ site.author }}</p>
+  <h1 id="home-title">Software, AI &amp; the<br class="desktop-break"> things in between<span class="accent">.</span></h1>
+  <p class="intro-description">Notes on what I’m building, what I’m learning, and the ideas that stick around.</p>
+</section>
+<div class="home-columns">
+  <div>
+    {% assign featured = site.posts.first %}
+    {% if featured %}
+    <section class="featured-post" aria-labelledby="latest-title">
+      <div class="section-heading"><h2 id="latest-title" class="eyebrow">Latest writing</h2><span class="edition">{{ site.posts.size }} {% if site.posts.size == 1 %}post{% else %}posts{% endif %} & counting</span></div>
+      <article>
+        {% include post-meta.html post=featured %}
+        <h3 class="feature-title"><a href="{{ featured.url | relative_url }}">{{ featured.title | escape }}</a></h3>
+        <p class="feature-excerpt">{{ featured.description | default: featured.excerpt | strip_html | normalize_whitespace | escape }}</p>
+        <a class="text-link" href="{{ featured.url | relative_url }}">Read the story <span aria-hidden="true">↗</span><span class="sr-only">: {{ featured.title | escape }}</span></a>
+      </article>
+    </section>
+    {% if site.posts.size > 1 %}
+    <section class="more-writing" aria-labelledby="more-title">
+      <div class="section-heading"><h2 id="more-title" class="eyebrow">More writing</h2><a class="quiet-link" href="{{ '/blog/' | relative_url }}">View archive <span aria-hidden="true">→</span></a></div>
+      <ul class="post-list">{% for post in site.posts offset: 1 limit: 5 %}{% include post-entry.html post=post %}{% endfor %}</ul>
+    </section>
+    {% endif %}
+    {% else %}
+    <p class="empty-state">The first post is on its way. <a href="{{ '/feed.xml' | relative_url }}">Follow the RSS feed</a> to keep up.</p>
+    {% endif %}
   </div>
-
-  {% include landing-footer.html %}
-  {% include modals.html %}
-  {% include scripts.html %}
-</body>
-</html>
+  <aside class="home-sidebar" aria-label="About this blog">
+    {% include author-card.html %}
+    {% if site.tags.size > 0 %}
+    <section class="sidebar-topics" aria-labelledby="topics-title">
+      <h2 class="eyebrow" id="topics-title">Explore topics</h2>
+      <div class="topic-links">{% assign sorted_tags = site.tags | sort %}{% for tag in sorted_tags %}<a href="{{ '/blog/' | relative_url }}?topic={{ tag[0] | url_encode }}">{{ tag[0] | escape }} <span>{{ tag[1].size }}</span></a>{% endfor %}</div>
+    </section>
+    {% endif %}
+    <p class="sidebar-rss"><a href="{{ '/feed.xml' | relative_url }}">Follow via RSS <span aria-hidden="true">↗</span></a><br><span>A little less algorithm. A little more reading.</span></p>
+  </aside>
+</div>

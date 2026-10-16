@@ -1,0 +1,2 @@
+{% assign words = include.post.content | strip_html | number_of_words %}{% assign minutes = words | plus: 199 | divided_by: 200 | at_least: 1 %}
+<p class="post-meta"><time datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: "%b %-d, %Y" }}</time><span aria-hidden="true">·</span><span>{{ minutes }} min read</span>{% if include.post.tags.first %}<span aria-hidden="true">·</span><a href="{{ '/blog/' | relative_url }}?topic={{ include.post.tags.first | url_encode }}">{{ include.post.tags.first | escape }}</a>{% endif %}</p>

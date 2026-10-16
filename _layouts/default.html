@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-{% include head.html %}
-</head>
-<body{% if page.layout == 'post' %} class="is-post"{% endif %}>
+<head>{% include head.html %}</head>
+<body class="layout-{{ page.layout | escape }}">
+  <a class="skip-link" href="#content">Skip to content</a>
   {% include nav.html %}
-  <main>
-    {{ content }}
-  </main>
+  <main id="content" tabindex="-1">{{ content }}</main>
   {% include footer.html %}
   {% include modals.html %}
   {% include scripts.html %}
