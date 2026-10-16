@@ -1,0 +1,61 @@
+name: Email new blog posts
+
+on:
+  workflow_run:
+    workflows: [pages-build-deployment]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Preview delivery, send a test only to Henry, or send unpublished notifications
+        type: choice
+        options: [preview, test, sync]
+        default: preview
+  schedule:
+    - cron: '17,47 * * * *'
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: blog-newsletter
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'sync' }}
+      NEWSLETTER_URL: https://sczheyjdrpbfkzlteyou.supabase.co/functions/v1/blog-newsletter
+    steps:
+      - name: Notify subscribers after the published site is ready
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          const endpoint = process.env.NEWSLETTER_URL;
+          const tokenUrl = new URL(process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
+          tokenUrl.searchParams.set('audience', endpoint);
+          const identity = await fetch(tokenUrl, {
+            headers: { Authorization: 'Bearer ' + process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN },
+            signal: AbortSignal.timeout(15000),
+          });
+          if (!identity.ok) throw new Error('Could not obtain the GitHub job identity');
+          const { value: token } = await identity.json();
+          for (let batch = 0; batch < 10; batch++) {
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ mode: process.env.MODE }),
+              signal: AbortSignal.timeout(120000),
+            });
+            const result = await response.json();
+            console.log(JSON.stringify(result));
+            if (!response.ok) throw new Error('Newsletter job failed; see the function logs');
+            if (!result.more) break;
+            if (batch === 9) throw new Error('More recipients remain; the next scheduled run will continue');
+          }
+          NODE

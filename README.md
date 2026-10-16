@@ -50,6 +50,7 @@ node --check assets/js/blog.js
 node --check assets/js/site.js
 node --check assets/js/subscribe.js
 node --check assets/js/post-engagement.js
+node --test tests/newsletter.test.mjs
 ```
 
 The site checker validates local URLs and anchors, unique IDs, page titles and descriptions, form labels, shared navigation, homepage post deduplication, RSS, and sitemap XML. Browser verification should also cover archive search, topic deep links, mobile widths, dialog focus, and form success/failure states. Mock subscription and authentication requests during browser tests to avoid creating accounts, sending email, or inserting test subscriber addresses.
@@ -67,3 +68,17 @@ The backend project must be active for subscriptions and reader interactions. Re
 ## Layout references
 
 Familiar blog patterns informed the structure: [Josh W. Comeau](https://www.joshwcomeau.com/) for clear article summaries and topic browsing, and [Simon Willison](https://simonwillison.net/) for searchable archives, dated entries, and RSS. The blog retains its own warm paper palette and serif typography.
+
+## New-post email workflow
+
+`.github/workflows/notify-posts.yml` calls the deployed `blog-newsletter` Edge Function after a successful GitHub Pages deployment. A twice-hourly retry catches delayed publications and failed deliveries. Manual dispatch supports `preview`, `test` (only the owner), and `sync`.
+
+The function reads the **published** `/newsletter.json` manifest, so an email links to a live post. The current archive is recorded as a baseline. It emails only new posts, only to readers who subscribed before that post was first observed, and records each successful recipient delivery. Stable Resend idempotency keys prevent duplicates when a request is retried. An unfinished batch resumes on the next run.
+
+Authentication uses short-lived GitHub Actions OIDC identities restricted to this repository ID, its owner ID, `main`, and the exact notification workflow. No long-lived GitHub-to-Supabase credential is needed. The function verifies these identities itself (`verify_jwt = false` disables only Supabase's legacy JWT gateway). All delivery-ledger tables have RLS enabled and no access for `anon` or `authenticated` roles.
+
+`RESEND_API_KEY` must be configured in Supabase Edge Function secrets. Use a sending-only key restricted to `henryjstarr.com`. The sender is `Henry Starr <noreply@henryjstarr.com>` with replies routed to the author. Database credentials use Supabase's server-only default secrets. Never put either credential in a public file, workflow log, or browser bundle.
+
+Each notification includes a signed unsubscribe link and one-click unsubscribe headers. Opening the link displays confirmation; a POST removes the subscriber. Link previews and email scanners making GET requests do not unsubscribe readers.
+
+The function source lives in `supabase/functions/blog-newsletter/`. The SQL migration creates private delivery receipts and seeds the current archive without sending it. Deploy source changes with the Supabase function tooling, preserve the key, and run the Node tests before pushing. Use a manual `test` workflow run and check both Resend delivery status and the recipient inbox to verify the live pipeline.

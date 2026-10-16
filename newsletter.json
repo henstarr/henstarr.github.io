@@ -1,0 +1,6 @@
+---
+layout: null
+permalink: /newsletter.json
+sitemap: false
+---
+{"posts":[{% for post in site.posts %}{"url":{{ post.url | absolute_url | jsonify }},"title":{{ post.title | jsonify }},"description":{{ post.description | default: post.excerpt | strip_html | normalize_whitespace | truncate: 300 | jsonify }},"published_at":{{ post.date | date_to_xmlschema | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]}

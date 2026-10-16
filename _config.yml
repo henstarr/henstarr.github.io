@@ -47,3 +47,5 @@ exclude:
   - output
   - scripts
   - .playwright-cli
+  - supabase
+  - tests
