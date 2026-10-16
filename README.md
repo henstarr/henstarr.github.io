@@ -59,7 +59,7 @@ Push reviewed changes to `main` to trigger the existing GitHub Pages build. `CNA
 
 ## Email list and reader accounts
 
-The footer verifies addresses using Supabase magic links, then asks the verified reader to confirm joining. It stores the verified address in the existing `subscribers` table using the reader’s access token. The existing insert policy only permits a signed-in user to subscribe their own email; anonymous inserts are intentionally blocked. The `?subscribe=1` return URL opens the confirmation state without automatically enrolling anyone. **This site does not send automated new-post emails.** The form and post copy state that addresses are saved for future updates. Readers can use `/feed.xml` to follow new posts immediately, or email the author to leave the list.
+The footer verifies addresses using Supabase magic links, then asks the verified reader to confirm joining. It stores the verified address in the existing `subscribers` table using the reader’s access token. The existing insert policy only permits a signed-in user to subscribe their own email; anonymous inserts are intentionally blocked. The `?subscribe=1` return URL opens the confirmation state without automatically enrolling anyone. New posts are emailed automatically after publication using the workflow below. Each new-post email includes an unsubscribe link; `/feed.xml` remains available for RSS readers.
 
 The pinned Supabase 2.118.0 browser bundle is served locally from `assets/vendor/` with its MIT license; its npm tarball integrity was verified before vendoring. Local asset URLs include a shared build version to avoid mixing old JavaScript with new page markup after a deployment.
 
@@ -75,7 +75,7 @@ Familiar blog patterns informed the structure: [Josh W. Comeau](https://www.josh
 
 ## New-post email workflow
 
-`.github/workflows/notify-posts.yml` calls the deployed `blog-newsletter` Edge Function after the successful “pages build and deployment” GitHub Pages workflow. A twice-hourly retry catches delayed publications and failed deliveries. Manual dispatch supports `preview`, `test` (only the owner), and `sync`.
+`.github/workflows/notify-posts.yml` calls the deployed `blog-newsletter` Edge Function after the successful GitHub Pages workflow. Its workflow name is `pages-build-deployment` (the Actions run label is “pages build and deployment”); the trigger must match the workflow name. A twice-hourly retry catches delayed publications and failed deliveries. Manual dispatch supports `preview`, `test` (only the owner), and `sync`.
 
 The function reads the **published** `/newsletter.json` manifest, so an email links to a live post. The current archive is recorded as a baseline. It emails only new posts, only to readers who subscribed before that post was first observed, and records each successful recipient delivery. Stable Resend idempotency keys prevent duplicates when a request is retried. An unfinished batch resumes on the next run.
 
