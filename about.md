@@ -2,15 +2,9 @@
 layout: about
 title: About
 permalink: /about/
-description: About Henry Starr, a University of Maryland computer science graduate writing about software, AI, and things he's building.
+description: About Henry Starr, a University of Maryland computer science graduate.
 ---
 
-I’m a graduate of the University of Maryland with a Bachelor’s in Computer Science and a concentration in Philosophy.
+I’m Henry Starr. I graduated from the University of Maryland with a bachelor’s in Computer Science and a concentration in Philosophy.
 
-This blog is a place for short notes on what I’m building, things I run into at work, and projects that don’t fit neatly on a résumé. The writing covers software engineering, AI, and the ideas I’m working through along the way.
-
-## Start with the writing
-
-[Why I Rebuilt This Site]({% post_url 2026-08-31-why-i-rebuilt-this-site %}) explains how this corner of the internet became a blog.
-
-You can find everything in the [archive]({{ '/blog/' | relative_url }}), or follow the [RSS feed]({{ '/feed.xml' | relative_url }}) in your favorite reader.
+I write about software engineering, AI, and my projects.

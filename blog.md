@@ -1,6 +1,6 @@
 ---
 layout: blog
 title: Archive
-description: All of Henry Starr's writing on software, AI, and building things. Search posts and browse by topic.
+description: Posts by Henry Starr. Search posts or filter by topic.
 permalink: /blog/
 ---

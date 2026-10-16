@@ -1,8 +1,8 @@
 <section class="subscribe" id="subscribe" aria-labelledby="subscribe-title">
-  <div class="subscribe-copy"><p class="eyebrow">Stay in the loop</p><h2 id="subscribe-title">Good things take a little curiosity.</h2><p>Get new posts by email, or <a href="{{ '/feed.xml' | relative_url }}">follow the RSS feed</a>.</p></div>
-  <div><form id="subscribe-form" class="subscribe-row" hidden><label for="subscribe-email">Your email address</label><div class="input-row"><input type="email" name="email" id="subscribe-email" placeholder="you@example.com" autocomplete="email" required maxlength="254" aria-describedby="subscribe-note subscribe-status"><button type="submit" class="button">Subscribe <span aria-hidden="true">↗</span></button></div></form>
-    <p class="form-note" id="subscribe-note">We’ll verify your address before you join. Unsubscribe anytime using the link in any new-post email.</p>
+  <div class="subscribe-copy"><h2 id="subscribe-title">Subscribe</h2><p>New posts by email.</p></div>
+  <div><form id="subscribe-form" class="subscribe-row" hidden><label for="subscribe-email">Email address</label><div class="input-row"><input type="email" name="email" id="subscribe-email" placeholder="you@example.com" autocomplete="email" required maxlength="254" aria-describedby="subscribe-note subscribe-status"><button type="submit" class="button">Subscribe</button></div></form>
+    <p class="form-note" id="subscribe-note">Verify your email to subscribe. Unsubscribe anytime.</p>
     <p class="form-status" id="subscribe-status" role="status" aria-live="polite"></p>
-    <noscript><p><a href="mailto:{{ site.email }}?subject=Blog%20updates">Email me to join the list</a>, or follow via RSS.</p></noscript>
+    <noscript><p><a href="mailto:{{ site.email }}?subject=Blog%20updates">Email me to subscribe</a>, or <a href="{{ '/rss/' | relative_url }}">use RSS</a>.</p></noscript>
   </div>
 </section>

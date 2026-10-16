@@ -27,7 +27,7 @@ tags: [Building, Web]
 
 Write the body in Markdown below the front matter. Dates come from filenames. Reading times, topic links, archive year groups, RSS, and older/newer navigation are generated from the posts. Use existing tag names where possible to keep the archive consistent. Posts can use `description` for a deliberate preview; otherwise, the first paragraph is used.
 
-The homepage features the newest post, followed by up to five older posts. The archive lists every post with full-text search and combined topic filters. Archive filters are preserved in the URL so filtered views can be shared. Posts remain readable and the archive remains browsable without JavaScript.
+The homepage lists the six newest posts. The archive lists every post with full-text search and combined topic filters. Archive filters are preserved in the URL so filtered views can be shared. Posts remain readable and the archive remains browsable without JavaScript.
 
 ## Editing pages and styles
 
@@ -35,9 +35,10 @@ The homepage features the newest post, followed by up to five older posts. The a
 - `about.md`: author biography and introduction.
 - `blog.md`: selects the archive layout at `/blog/`.
 - `_layouts/default.html`: shared document, navigation, main landmark, footer, and dialogs.
-- `_includes/`: shared metadata, post listings, author card, navigation, and subscription form.
+- `_includes/`: shared metadata, post listings, navigation, and subscription form.
 - `assets/css/style.css`: shared palette, typography, spacing, and responsive styles.
 - `assets/js/blog.js`: archive filters, article contents, and copy-link behavior.
+- `rss.html`: the `/rss/` subscription page with a copyable feed URL. The Jekyll Feed plugin continues to generate the Atom feed at `/feed.xml`; feed-reader autodiscovery points directly to that XML endpoint with the correct media type.
 
 Keep the same navigation and footer across pages. There is no first-visit popup; sign-in dialogs open only when a reader requests them. Dialogs use native browser focus management, Escape support, and keyboard containment.
 
@@ -68,10 +69,6 @@ Supabase also provides magic-link sign-in, comments and likes. `assets/js/site.j
 The backend project must be active for subscriptions and reader interactions. Restore it in Supabase if paused. Failed calls show a readable error and retain comment/email input for retry; they do not block reading. Confirm that Supabase Auth’s allowed redirect URLs include the production domain before testing magic links.
 
 Authentication and new-post emails share the inline HTML layout in `supabase/functions/blog-newsletter/email-layout.js`. Run `node scripts/render_emails.mjs` after changing that design. Paste the generated `supabase/templates/confirm-email.html` into both **Confirm sign up** and **Magic link or OTP** in Supabase Authentication → Emails, with subject **Confirm your email · Henry Starr**. Saving a file in this repository does not update Supabase’s hosted Auth templates. Keep `{{ .ConfirmationURL }}` intact so Supabase supplies each one-time link. The email correctly explains that joining the list requires confirmation on the site after email verification.
-
-## Layout references
-
-Familiar blog patterns informed the structure: [Josh W. Comeau](https://www.joshwcomeau.com/) for clear article summaries and topic browsing, and [Simon Willison](https://simonwillison.net/) for searchable archives, dated entries, and RSS. The blog retains its own warm paper palette and serif typography.
 
 ## New-post email workflow
 

@@ -17,10 +17,7 @@
     status.dataset.state = state || "";
   }
   function setButtonLabel(text) {
-    var arrow = document.createElement("span");
-    arrow.setAttribute("aria-hidden", "true");
-    arrow.textContent = "↗";
-    button.replaceChildren(document.createTextNode(text + " "), arrow);
+    button.textContent = text;
   }
   function showConfirmation(session) {
     if (confirming && session && session.user) {
@@ -64,7 +61,7 @@
         signal: controller.signal
       });
       if (response.status === 201 || response.status === 409) {
-        setStatus(response.status === 201 ? "You’re on the list. Thanks for following along!" : "You’re already on the list. Thanks for being here!", "ok");
+        setStatus(response.status === 201 ? "You’re subscribed." : "You’re already subscribed.", "ok");
         if (confirming) {
           var location = new URL(window.location.href);
           location.searchParams.delete("subscribe");

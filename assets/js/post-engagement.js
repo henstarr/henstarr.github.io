@@ -3,9 +3,9 @@
   var root = document.getElementById("engagement");
   if (!root) return;
   var status = document.getElementById("engagement-status");
-  status.textContent = "Loading the conversation…";
+  status.textContent = "Loading comments…";
   var sb = window.hsSupabase;
-  if (!sb) { status.textContent = "The conversation is temporarily unavailable. You can still reach me using the Email link below."; return; }
+  if (!sb) { status.textContent = "Comments are temporarily unavailable."; return; }
   var slug = root.dataset.postSlug;
   var likeButton = document.getElementById("like-button");
   var likeCount = document.getElementById("like-count");
@@ -55,7 +55,7 @@
     if (response.error) throw response.error;
     if (version !== generation) return;
     renderComments(response.data || []);
-    status.textContent = (response.data || []).length ? "" : "No comments yet. There’s room for your thoughts.";
+    status.textContent = (response.data || []).length ? "" : "No comments yet.";
   }
   async function loadLikes(version) {
     var response = await sb.from("likes").select("post_slug", { count: "exact", head: true }).eq("post_slug", slug);
@@ -80,7 +80,7 @@
     form.hidden = !current;
     prompt.hidden = !!current;
     try { await Promise.all([loadLikes(version), loadComments(version)]); }
-    catch (error) { if (version === generation) status.textContent = "The conversation couldn’t be loaded. Please try again later or use the Email link below."; }
+    catch (error) { if (version === generation) status.textContent = "Comments couldn’t be loaded. Please try again later."; }
   }
   likeButton.addEventListener("click", async function () {
     if (!session) return window.hsOpenSignIn();

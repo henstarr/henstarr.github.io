@@ -25,6 +25,8 @@ pages.each do |path, doc|
   report.call('missing title') if doc.at_css('title')&.text.to_s.strip.empty?
   report.call('missing description') if doc.at_css('meta[name="description"]')&.[]('content').to_s.empty?
   report.call('missing canonical URL') unless doc.at_css('link[rel="canonical"]')
+  feed = doc.at_css('link[rel="alternate"][type="application/atom+xml"]')
+  report.call('missing Atom feed discovery link') unless feed && feed['href'] == '/feed.xml'
   ids = doc.css('[id]').map { |element| element['id'] }
   report.call('duplicate element IDs') unless ids.uniq == ids
   doc.css('img').each { |img| report.call('image missing alt attribute') unless img.key?('alt') }
@@ -62,9 +64,23 @@ end
 rescue Nokogiri::XML::SyntaxError => error
   errors << "Invalid #{name}: #{error.message}"
 end
+feed_path = root.join('feed.xml')
+if feed_path.file?
+  feed = Nokogiri::XML(feed_path.read)
+  ns = { 'atom' => 'http://www.w3.org/2005/Atom' }
+  errors << 'Feed is not an Atom document' unless feed.at_xpath('/atom:feed', ns)
+  ids = feed.xpath('/atom:feed/atom:entry/atom:id', ns).map(&:text)
+  errors << 'Duplicate feed entry IDs' unless ids.uniq == ids
+  feed.xpath('//atom:link', ns).each do |link|
+    url = URI.parse(link['href'].to_s)
+    errors << 'Feed link must be an absolute HTTPS URL' unless url.is_a?(URI::HTTPS) && url.host
+  end
+  rss = pages[root.join('rss/index.html')]
+  errors << 'RSS page is missing its feed URL' unless rss&.at_css('#feed-url')&.[]('value') == feed.at_xpath('/atom:feed/atom:link[@rel="self"]', ns)&.[]('href')
+end
 home = pages[root.join('index.html')]
 if home
-  urls = home.css('.home-columns article h3 a').map { |link| link['href'] }
+  urls = home.css('.home-posts .post-entry-title a').map { |link| link['href'] }
   errors << 'Homepage repeats a post' unless urls == urls.uniq
 end
 abort errors.join("\n") unless errors.empty?

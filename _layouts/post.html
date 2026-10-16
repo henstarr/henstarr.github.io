@@ -2,20 +2,20 @@
 layout: default
 ---
 <div class="reading-column">
-  <a class="back-link" href="{{ '/blog/' | relative_url }}"><span aria-hidden="true">←</span> All writing</a>
+  <a class="back-link" href="{{ '/blog/' | relative_url }}"><span aria-hidden="true">←</span> Archive</a>
   <article class="post">
     <header class="post-heading">
       {% include post-meta.html post=page %}<h1>{{ page.title | escape }}</h1>
       {% if page.description %}<p class="post-deck">{{ page.description | escape }}</p>{% endif %}
-      <div class="post-byline"><a href="{{ '/about/' | relative_url }}"><img src="{{ '/assets/img/henry-portrait.jpg' | relative_url }}" alt="" width="32" height="32">{{ site.author }}</a><button class="copy-link" type="button" data-copy-link hidden>Copy link <span aria-hidden="true">↗</span></button><span class="sr-only" id="copy-status" role="status"></span></div>
+      <div class="post-byline"><a href="{{ '/about/' | relative_url }}"><img src="{{ '/assets/img/henry-portrait.jpg' | relative_url }}" alt="" width="32" height="32">{{ site.author }}</a><button class="copy-link" type="button" data-copy-link hidden>Copy link</button><span class="sr-only" id="copy-status" role="status"></span></div>
     </header>
     <details class="post-toc" data-toc hidden><summary>On this page</summary><nav aria-label="Table of contents"><ol></ol></nav></details>
     <div class="post-content">{{ content }}</div>
     {% if page.tags.size > 0 %}<div class="post-tags" aria-label="Post topics">{% for tag in page.tags %}<a href="{{ '/blog/' | relative_url }}?topic={{ tag | url_encode }}">{{ tag | escape }}</a>{% endfor %}</div>{% endif %}
   </article>
-  <nav class="post-pagination" aria-label="More posts">
+  {% if page.previous or page.next %}<nav class="post-pagination" aria-label="More posts">
     {% if page.previous %}<a href="{{ page.previous.url | relative_url }}"><span class="eyebrow">← Older post</span><span>{{ page.previous.title | escape }}</span></a>{% endif %}
     {% if page.next %}<a href="{{ page.next.url | relative_url }}"><span class="eyebrow">Newer post →</span><span>{{ page.next.title | escape }}</span></a>{% endif %}
-  </nav>
+  </nav>{% endif %}
   {% include engagement.html %}
 </div>

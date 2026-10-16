@@ -1,11 +1,11 @@
 <header class="site-header">
   <div class="site-header-inner">
-    <a class="site-brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title | escape }} — home"><img src="{{ '/assets/img/henry-portrait.jpg' | relative_url }}" alt="" width="40" height="40"><span>{{ site.title }}<span class="brand-dot" aria-hidden="true">.</span></span></a>
+    <a class="site-brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title | escape }} — home"><img src="{{ '/assets/img/henry-portrait.jpg' | relative_url }}" alt="" width="40" height="40"><span>{{ site.title }}</span></a>
     <nav class="site-nav" aria-label="Main navigation">
       <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a>
       <a href="{{ '/blog/' | relative_url }}"{% if page.url == '/blog/' %} aria-current="page"{% endif %}>Archive</a>
       <a href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>About</a>
     </nav>
-    <div class="header-actions"><button type="button" class="auth-button" id="site-header-auth" aria-haspopup="dialog" hidden>Sign in</button><a class="button button-small" href="#subscribe">Subscribe <span aria-hidden="true">↗</span></a></div>
+    <div class="header-actions"><button type="button" class="auth-button" id="site-header-auth" aria-haspopup="dialog" hidden>Sign in</button><a class="button button-small" href="#subscribe">Subscribe</a></div>
   </div>
 </header>

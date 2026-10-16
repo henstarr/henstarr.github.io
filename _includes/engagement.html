@@ -1,8 +1,8 @@
-<section class="engagement" id="engagement" data-post-slug="{{ page.url | escape }}" aria-label="Reader conversation">
+<section class="engagement" id="engagement" data-post-slug="{{ page.url | escape }}" aria-label="Comments">
   <div class="engagement-bar"><button type="button" class="like-button" id="like-button" aria-pressed="false" aria-label="Like this post" disabled><span class="like-icon" aria-hidden="true">&hearts;</span><span id="like-count">—</span></button></div>
-  <div class="comments"><h2 class="comments-title">Conversation <span id="comment-count"></span></h2>
+  <div class="comments"><h2 class="comments-title">Comments <span id="comment-count"></span></h2>
     <p class="form-status" id="engagement-status" role="status" aria-live="polite"></p>
-    <form id="comment-form" class="comment-form" hidden><label for="comment-body">Your comment</label><textarea id="comment-body" placeholder="Add to the conversation…" maxlength="2000" required aria-describedby="engagement-status"></textarea><button type="submit" class="button">Post comment</button></form>
+    <form id="comment-form" class="comment-form" hidden><label for="comment-body">Your comment</label><textarea id="comment-body" placeholder="Write a comment…" maxlength="2000" required aria-describedby="engagement-status"></textarea><button type="submit" class="button">Post comment</button></form>
     <button type="button" class="comment-signin-prompt" id="comment-signin-prompt" hidden>Sign in to leave a comment</button>
     <ul class="comment-list" id="comment-list"></ul>
     <noscript><p>Enable JavaScript to load comments, or <a href="mailto:{{ site.email }}">send me a note</a>.</p></noscript>

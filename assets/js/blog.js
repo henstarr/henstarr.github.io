@@ -79,10 +79,26 @@
         var canonical = document.querySelector('link[rel="canonical"]');
         await navigator.clipboard.writeText(canonical ? canonical.href : window.location.href.split("#")[0]);
         status.textContent = "Link copied to clipboard.";
-        copy.textContent = "Link copied ✓";
-        window.setTimeout(function () { copy.textContent = "Copy link ↗"; }, 2500);
+        copy.textContent = "Copied";
+        window.setTimeout(function () { copy.textContent = "Copy link"; }, 2500);
       } catch (error) {
         status.textContent = "The link could not be copied. You can copy the address from your browser.";
+      }
+    });
+  }
+
+  var feedCopy = document.querySelector("[data-copy-feed]");
+  if (feedCopy && navigator.clipboard) {
+    feedCopy.hidden = false;
+    feedCopy.addEventListener("click", async function () {
+      var status = document.getElementById("feed-copy-status");
+      try {
+        await navigator.clipboard.writeText(document.getElementById("feed-url").value);
+        status.textContent = "Feed URL copied.";
+        feedCopy.textContent = "Copied";
+        window.setTimeout(function () { feedCopy.textContent = "Copy URL"; }, 2500);
+      } catch (error) {
+        status.textContent = "Select and copy the URL above.";
       }
     });
   }

@@ -1,0 +1,16 @@
+---
+layout: default
+title: RSS
+description: Follow Henry Starr’s blog in your feed reader.
+permalink: /rss/
+---
+<div class="rss-page">
+<header class="page-heading"><h1>RSS</h1></header>
+<section class="rss-details" aria-label="Subscribe with a feed reader">
+  <p>Add this URL to your feed reader to receive new posts.</p>
+  <label for="feed-url">Feed URL</label>
+  <div class="input-row"><input id="feed-url" type="url" value="{{ '/feed.xml' | absolute_url }}" readonly spellcheck="false"><button class="button" type="button" data-copy-feed hidden>Copy URL</button></div>
+  <p class="form-status" id="feed-copy-status" role="status" aria-live="polite"></p>
+  <p><a href="{{ '/feed.xml' | relative_url }}">Open XML feed</a></p>
+</section>
+</div>
