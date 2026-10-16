@@ -11,6 +11,6 @@ This blog is a place for short notes on what I’m building, things I run into a
 
 ## Start with the writing
 
-[Why I Rebuilt This Site]({% post_url 2026-08-31-why-i-rebuilt-this-site %}) explains how this corner of the internet became a blog. [How This Blog Works]({% post_url 2026-08-30-how-this-blog-works %}) is a look behind the scenes.
+[Why I Rebuilt This Site]({% post_url 2026-08-31-why-i-rebuilt-this-site %}) explains how this corner of the internet became a blog.
 
 You can find everything in the [archive]({{ '/blog/' | relative_url }}), or follow the [RSS feed]({{ '/feed.xml' | relative_url }}) in your favorite reader.
