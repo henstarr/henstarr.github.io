@@ -6,3 +6,5 @@ _site/
 vendor/
 output/
 .playwright-cli/
+
+supabase/.temp/
